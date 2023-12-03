@@ -19,8 +19,24 @@ pub mod one {
         value
     }
 
+    /// Converts digits encoded in their English spelling in the input string
+    /// to an encoding containing their numeric counterparts. This approach allows
+    /// for overlapping strings such as oneight which should parse to both 1 and 8.
+    fn make_digits(puzzle_line: &String) -> String {
+        puzzle_line
+            .replace("one", "one1one")
+            .replace("two", "two2two")
+            .replace("three", "three3three")
+            .replace("four", "four4four")
+            .replace("five", "five5five")
+            .replace("six", "six6six")
+            .replace("seven", "seven7seven")
+            .replace("eight", "eight8eight")
+            .replace("nine", "nine9nine")
+    }
+
     pub fn solution(lines: Vec<String>) {
-        let result: u32 = lines.iter().map(|l| digits(l)).sum();
+        let result: u32 = lines.iter().map(|l| digits(&make_digits(l))).sum();
         println!("Decoded the calibration code. Result: {}", result);
     }
 }
